@@ -1,5 +1,6 @@
 import tkinter as tk
 from StockScrapper import StockScrapper
+import time
 import json
 import os
 
@@ -12,7 +13,8 @@ def save_json(response, fname):
 class StockScrapperApp:
     def __init__(self):
         self.driver = StockScrapper()
-        
+        self.wait_time = 20
+
         self.window = tk.Tk()
         self.window.title("StockScrapper")
         self.window.resizable(width=0, height=0)
@@ -48,7 +50,8 @@ class StockScrapperApp:
             self.driver.initialize_driver()
         else:
             self.promt(f"Scrapped {symbol} data\n")
-            save_json(response, f"{symbol}.json")
+            save_json(response, f"{symbol}.json")        
+        time.sleep(self.wait_time)
 
     def run(self):
         self.window.mainloop()
